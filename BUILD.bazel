@@ -116,8 +116,17 @@ cc_library(
 
 cc_binary(
     name = "datagen_cli",
-    srcs = ["tests/datagencli.c"],
-    includes = ["programs"],
+    srcs = [
+        "programs/lorem.c",
+        "programs/lorem.h",
+        "tests/datagencli.c",
+        "tests/loremOut.c",
+        "tests/loremOut.h",
+    ],
+    includes = [
+        "programs",
+        "tests",
+    ],
     deps = [":datagen"],
 )
 
@@ -129,9 +138,13 @@ cc_test(
         "programs/benchfn.h",
         "programs/benchzstd.c",
         "programs/benchzstd.h",
+        "programs/lorem.c",
+        "programs/lorem.h",
         "programs/timefn.c",
         "programs/timefn.h",
         "tests/fullbench.c",
+        "tests/loremOut.c",
+        "tests/loremOut.h",
     ],
     copts = select({
         "@platforms//os:windows": [],
@@ -140,6 +153,7 @@ cc_test(
     includes = [
         "lib/common",
         "programs",
+        "tests",
     ],
     deps = [
         ":datagen",
